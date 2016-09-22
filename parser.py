@@ -4,6 +4,7 @@ from bs4 import BeautifulSoup
 from selenium import webdriver
 from selenium.webdriver.support.ui import WebDriverWait
 
+#TODO: сделать относительным
 driver = webdriver.Chrome('/Users/sp41mer/PycharmProjects/FbPhoneSearch/chromedriver')
 
 phones = [
@@ -35,6 +36,7 @@ urls = []
 for phone in phones:
     driver.get("https://www.facebook.com/search/top/?q={}".format(phone))
     try:
+        #ждем до первого тэга img
         WebDriverWait(driver, 10).until(lambda driver: driver.find_element_by_css_selector('img'))
         html = driver.page_source
         soup = BeautifulSoup(html)
